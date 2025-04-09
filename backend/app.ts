@@ -2,7 +2,7 @@ import express from 'express';
 import recipeRoutes from './routes/recipeRoutes';
 import filterRoutes from './routes/filterRoutes';
 import corsMiddleware from './middlewares/allowedOrigins';
-import { errorHandler } from './middleware/errorHandler';
+import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 const PORT = process.env.PORT;

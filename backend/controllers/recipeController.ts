@@ -4,7 +4,7 @@ import {
     fetchRecipeById
 } from '../services/recipeServices';
 import { paginateResults, getPaginationFromQuery } from '../utils/pagination';
-import { AppError } from '../middleware/errorHandler';
+import { AppError } from '../middlewares/errorHandler';
 
 const masterEndpoint = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
