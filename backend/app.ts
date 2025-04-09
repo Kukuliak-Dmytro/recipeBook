@@ -1,9 +1,7 @@
 import express, { Request, Response } from 'express';
-import dotenv from 'dotenv';
-dotenv.config();
+import masterConfig from './utils/masterConfig';
 const app = express();
-const PORT = 4000;
-
+const port = masterConfig.server.port;
 // Middleware to parse JSON
 app.use(express.json());
 
@@ -13,6 +11,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
