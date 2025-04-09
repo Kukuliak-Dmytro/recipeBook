@@ -214,10 +214,6 @@ export default function Home() {
     fetchRecipes(1, pagination.limit, searchTerm);
   };
 
-  const handleRecipeClick = (id: string) => {
-    // Navigate to recipe details page
-    window.location.href = `/recipes/${id}`;
-  };
 
   const FiltersSidebar = () => (
     <div className="bg-card rounded-lg p-4 space-y-6 shadow-sm">
@@ -369,7 +365,6 @@ export default function Home() {
                     <RecipeCard
                       key={recipe.id}
                       {...recipe}
-                      onClick={() => handleRecipeClick(recipe.id)}
                     />
                   ))}
                 </div>

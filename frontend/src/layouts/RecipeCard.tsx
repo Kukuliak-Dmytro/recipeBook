@@ -3,26 +3,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '../components/ui/badge';
 import { Button } from "../components/ui/button";
 import { ExternalLink, Globe, Tag, Youtube } from "lucide-react";
-
-interface Ingredient {
-  name: string;
-  measure: string;
-}
-
-interface RecipeCardProps {
-  id: string;
-  name: string;
-  thumbnail: string;
-  tags: string[];
-  youtubeUrl: string;
-  category: string;
-  area: string;
-  instructions: string;
-  ingredients: Ingredient[];
-  onClick?: () => void;
-}
-
-const RecipeCard: React.FC<RecipeCardProps> = ({
+import { Recipe } from "../utils/types/types";
+import { Link } from 'react-router-dom';
+const RecipeCard: React.FC<Recipe> = ({
   id,
   name,
   thumbnail,
@@ -31,8 +14,6 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   category,
   area,
   instructions,
-  ingredients,
-  onClick,
 }) => {
   return (
     <Card className="h-full flex flex-col ">
@@ -86,10 +67,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
             </a>
           </Button>
         )}
-        <Button size="sm" onClick={onClick}>
-          <ExternalLink className="h-4 w-4 mr-1" />
-          View Details
-        </Button>
+        <Link to={`/recipes/${id}`}>
+            <Button size="sm" >
+              <ExternalLink className="h-4 w-4 mr-1" />
+              View Details
+            </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

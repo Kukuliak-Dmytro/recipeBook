@@ -11,17 +11,15 @@ export class AppError extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-
 // Global error handling middleware
-export const errorHandler = (err: Error | AppError, req: Request, res: Response) :Promise<any>=> {
+export const errorHandler = (err: Error, req: Request, res: Response): Promise<any> => {
   console.error(`Error: ${err.message}`, err);
-  
-  const statusCode = 'statusCode' in err ? err.statusCode : 500;
-  
+
+  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
+
   res.status(statusCode).json({
     success: false,
-    message: err.message,
-    error: masterConfig.server.environment === 'development' ? err.stack : 'An error occurred'
+    error: masterConfig.server.environment === 'development' ? err.message : 'An error occurred'
   });
   return Promise.resolve();
 };
