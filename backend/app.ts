@@ -1,16 +1,26 @@
-import express, { Request, Response } from 'express';
-import masterConfig from './utils/masterConfig';
-const app = express();
-const port = masterConfig.server.port;
-// Middleware to parse JSON
-app.use(express.json());
+import express from 'express';
+import recipeRoutes from './routes/recipeRoutes';
+import filterRoutes from './routes/filterRoutes';
+import corsMiddleware from './middlewares/allowedOrigins';
+import { errorHandler } from './middleware/errorHandler';
 
-// Basic route
-app.get('/', (req: Request, res: Response) => {
-    res.send('Welcome to the Recipe Book API! Here is the test env var: ' + process.env.TEST_ENV);
-});
+const app = express();
+const PORT = process.env.PORT;
+
+// Middleware
+app.use(express.json());
+app.use(corsMiddleware);
+
+// Routes
+app.use('/api/', recipeRoutes);
+app.use('/api/filters', filterRoutes);
+
+// Error handling middleware (must be after all routes)
+app.use(errorHandler);
 
 // Start the server
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
+export default app;
