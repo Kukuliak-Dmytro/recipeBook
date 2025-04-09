@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "start": "docker compose up -d",
+        "stop": "docker compose down",
+        "restart": "docker compose down --rmi=all && docker compose up -d"
+    }
+}
