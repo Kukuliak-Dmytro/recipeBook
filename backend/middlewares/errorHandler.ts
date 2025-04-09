@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import masterConfig from '../utils/masterConfig';
 
 export class AppError extends Error {
@@ -13,7 +13,7 @@ export class AppError extends Error {
 }
 
 // Global error handling middleware
-export const errorHandler = (err: Error | AppError, req: Request, res: Response, next: NextFunction) :Promise<any>=> {
+export const errorHandler = (err: Error | AppError, req: Request, res: Response) :Promise<any>=> {
   console.error(`Error: ${err.message}`, err);
   
   const statusCode = 'statusCode' in err ? err.statusCode : 500;

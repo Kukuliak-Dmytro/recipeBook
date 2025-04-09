@@ -35,13 +35,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   onClick,
 }) => {
   return (
-    <Card className="h-full flex flex-col overflow-hidden">
-      <div className="relative w-full h-48">
+    <Card className="h-full flex flex-col ">
+      <div className="w-full h-48">
         <img
+        className='object-cover w-full h-full rounded-t-md px-4'
           src={thumbnail}
           alt={name}
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <CardHeader className="pb-2">
