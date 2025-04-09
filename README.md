@@ -1,4 +1,3 @@
-
 # Recipe Book Application
 
 This is a full-stack recipe book application with a React frontend and Express backend.
@@ -21,7 +20,6 @@ This is a full-stack recipe book application with a React frontend and Express b
 
 ```bash
 git clone <repository-url>
-cd recipeBook
 ```
 
 ### Using Docker (Recommended)
@@ -33,14 +31,14 @@ The easiest way to run the application is using Docker:
 npm start
 
 # Stop the application
-npm run stop
+npm stop
 
 # Restart with clean images (useful for dependency changes)
-npm run restart
+npm restart
 ```
 
 This will:
-- Build and start the frontend container on port 80
+- Build and start the frontend container on port 5173
 - Build and start the backend container on port 3000
 - Mount volumes for real-time code changes
 
@@ -56,7 +54,7 @@ npm install
 npm start
 ```
 
-The backend server will start on http://localhost:4000.
+The backend server will start on http://localhost:3000.
 
 #### Frontend
 
@@ -102,7 +100,107 @@ This will compile TypeScript and build the production-ready assets in the `dist`
 
 ## API Endpoints
 
-- `GET /`: Welcome message and environment test
+### Base URL: `/api`
+
+### Recipe Endpoints
+
+#### `GET /recipes`
+Get paginated list of recipes
+
+**Query Parameters:**
+- `search`: Search recipes by name
+- `ingredient`: Filter recipes by ingredient
+- `area`: Filter recipes by area
+- `category`: Filter recipes by category
+- `page`: Page number (default: 1)
+- `limit`: Results per page (default: 10)
+
+**Response:**
+```json
+{
+  "success": true,
+  "count": 20,
+  "data": [/* recipe objects */],
+  "pagination": {
+    "total": 20,
+    "page": 1,
+    "limit": 10,
+    "totalPages": 2,
+    "hasNext": true,
+    "hasPrevious": false
+  }
+}
+```
+
+#### `GET /recipes/:id`
+Get a specific recipe by ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "id": "12345",
+    "name": "Recipe Name",
+    "thumbnail": "image-url",
+    "tags": ["tag1", "tag2"],
+    "youtubeUrl": "youtube-url",
+    "category": "Category",
+    "area": "Area",
+    "instructions": "Instructions...",
+    "ingredients": [
+      { "name": "Ingredient1", "measure": "1 cup" }
+    ]
+  }
+}
+```
+
+### Filter Endpoints
+
+#### `GET /filters/categories`
+Get all available categories
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    { "strCategory": "Category1" },
+    { "strCategory": "Category2" }
+  ]
+}
+```
+
+#### `GET /filters/areas`
+Get all available areas
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    { "strArea": "Area1" },
+    { "strArea": "Area2" }
+  ]
+}
+```
+
+#### `GET /filters/ingredients`
+Get all available ingredients
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "idIngredient": "1",
+      "strIngredient": "Ingredient1",
+      "strDescription": "Description"
+    }
+  ]
+}
+```
 
 ## Technologies
 
@@ -112,4 +210,3 @@ This will compile TypeScript and build the production-ready assets in the `dist`
 
 ## License
 
-[Your License Here]
